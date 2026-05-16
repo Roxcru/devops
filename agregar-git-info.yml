@@ -1,0 +1,11 @@
+#commit
+
+git commit -m "first commit"
+
+#aplicar git log
+
+#GIT RESET
+
+#Es un comando de Git que sirve para mover el puntero de commits (HEAD) y opcionalmente modificar el área de staging y los archivos del proyecto.
+#Es uno de los comandos más potentes —y peligrosos— porque puede “deshacer” cambios de distintas maneras.
+
