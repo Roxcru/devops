@@ -1,0 +1,47 @@
+# Con anchor (&) se define una referencia
+# Con aliases (*) se hace uso de dicha referencia definida y trae el contenido
+# Con merge keys (<<:) inserta el contenido dentro del objeto
+
+# Explicación: el anchor permite reutilizar un bloque de codigo o un dato, en otra parte del YML
+
+# Anchor ejemplo
+
+#Caso normal
+
+list-hero:
+  hero:
+    - name: Supergirl
+      age: 18
+      city: Metropolis
+      powers: 
+        - Super strength
+        - Flying
+        - Speed
+
+    - name: Superman
+      age: 30
+      city: Metropolis
+      powers: 
+        - Super strength
+        - Flying
+        - Speed
+
+
+#Aplicacion
+
+data_base: &data
+  city: Metropolis
+  powers: 
+    - Super strength
+    - Flying
+    - Speed
+
+list-hero:
+  heroes:
+    - name: Supergirl
+      age: 18
+      <<: *data
+
+    - name: Superman
+      age: 30
+      <<: *data

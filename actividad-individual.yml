@@ -1,0 +1,38 @@
+datosPersonales:
+
+  nombreCompleto: "Cesar Alberto"
+
+  apellidoPaterno: "Flores"
+
+  apellidoMaterno: "Salazar"
+
+  edad: 40
+
+  fechaNacimiento: 1985-03-28
+
+  profesion: >
+    Ingenieria de sistemas
+
+  altura: 1.68
+
+datosCurso:
+
+  Objetivos: |
+    Conocimiento y aplicacion de DevOps.
+    Crear proyectos que manejen un estandar de control mejorado.
+
+  participaCurso: true
+datosOtros:
+
+  hobbies:
+    - "Gimnacio"
+    - "Juego de video"
+
+  amigos:
+    - nombre: "Paola"
+      edad: 50
+      tiempo: 10
+
+    - nombre: "Roly"
+      edad: 40
+      tiempo: 30
