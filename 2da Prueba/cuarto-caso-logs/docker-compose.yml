@@ -1,0 +1,66 @@
+services:
+
+  log-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: log-generator
+    command: ["/app/generator.sh"]
+    volumes:
+      - logs_data:/var/log/app
+    networks:
+      - logs_network
+    restart: unless-stopped
+
+  log-rotator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: log-rotator
+    command: >
+      sh -c "echo '* * * * * /app/rotate.sh >> /var/log/rotate.log 2>&1'
+      > /etc/crontabs/root && crond -f -l 2"
+    volumes:
+      - logs_data:/var/log/app
+    networks:
+      - logs_network
+    restart: unless-stopped
+
+  log-compressor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: log-compressor
+    command: >
+      sh -c "echo '*/2 * * * * /app/compress.sh >> /var/log/compress.log 2>&1'
+      > /etc/crontabs/root && crond -f -l 2"
+    volumes:
+      - logs_data:/var/log/app
+    networks:
+      - logs_network
+    restart: unless-stopped
+
+  log-cleaner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: log-cleaner
+    command: >
+      sh -c "touch /var/log/clean.log &&
+      echo '*/5 * * * * /app/clean.sh >> /var/log/clean.log 2>&1'
+      > /etc/crontabs/root && 
+      crond -f -l 2"
+    volumes:
+      - logs_data:/var/log/app
+    networks:
+      - logs_network
+    restart: unless-stopped
+
+volumes:
+  logs_data:
+    name: cuarto_caso_logs_data
+
+networks:
+  logs_network:
+    name: cuarto_caso_logs_network
+    driver: bridge
